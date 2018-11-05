@@ -8,25 +8,32 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { LogInServiceProvider } from '../../providers/login-service/login-service';
 import * as JWT from "jwt-decode";
 
+
 /**
- * Generated class for the PerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Eu sei que ta td copiado e colado do perfil page mas tava ficando muito tarde e eu n posso perder muito mais tempo nisso
+ * Peço desculpas, sei que o correto n~eo é ter tanto codigo copiado como aqui, mas era o jeito mais rapido
  */
 
 @IonicPage()
 @Component({
-  selector: 'page-perfil',
-  templateUrl: 'perfil.html',
+  selector: 'page-meu-perfil',
+  templateUrl: 'meu-perfil.html',
 })
-export class PerfilPage {
+export class MeuPerfilPage {
 
   private _pius: Piu[];
   private _tempUserPius: Piu[] = [];
   private _tempUserfavPius: Piu[] = [];
-  private _tempUser: User;
+  private _tempUser: User = {
+    id: null,
+    username: null,
+    first_name: null,
+    last_name: null,
+    email: null,
+    foto_perfil: null
+};
   public numPius: number;
+  private JwtUser;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -35,8 +42,11 @@ export class PerfilPage {
     private socialSharing: SocialSharing,
     private _loginService: LogInServiceProvider,
     public toastCtrl: ToastController) {
-  
-      this._tempUser = this._userService.selectedUser;
+
+      this.JwtUser = JWT(this._loginService.getToken());
+      this._tempUser.id = this.JwtUser['user_id'];
+      console.log(this._tempUser.id);
+      this._tempUser.username = this.JwtUser['username']
       console.log("passei aqui começo de td");
       this._piuService.list().subscribe(
         (pius)=>{
@@ -112,6 +122,4 @@ export class PerfilPage {
   doRefresh(){
     this.navCtrl.setRoot(this.navCtrl.getActive().component)
   }
-  
-
 }

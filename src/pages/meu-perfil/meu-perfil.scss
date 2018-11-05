@@ -1,0 +1,29 @@
+page-meu-perfil {
+    .pius, .piusfav{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .piufav{
+        border: 0.5ch;
+        border-style: dashed;
+        border-color: black;
+        border-bottom-left-radius: 1ch;
+        border-top-left-radius: 1ch;
+        border-bottom-right-radius: 1ch;
+        border-top-right-radius: 1ch;
+    }
+    .footer{
+        display: flex;
+        flex-direction: row;
+    }
+    .conteudo{
+        margin-left: 1ch;
+    }
+    .username{
+        text-align: center;
+    }
+    .name{
+        text-align: center;
+    }
+
+}

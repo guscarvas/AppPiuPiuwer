@@ -1,0 +1,58 @@
+<ion-header>
+
+    <ion-navbar color="orange">
+      <ion-title style="padding-top: 5px">Perfil</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh()">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+      
+
+    <h1 class="username">{{_tempUser.username}}</h1>
+    <h3 class="name">Número de Pius: {{numPius}}</h3>
+    <div class="piusfav">
+      <ion-card *ngFor="let piufav of _tempUserfavPius" color="favorited" class="piufav">
+        <div style="margin:1.5ch">
+            <h1 icon-start><ion-icon name="contact"></ion-icon>{{_tempUser.username}}</h1>
+            <p class="date">{{piufav.data | timeAgo}}</p>  
+          </div>
+          <p class="conteudo">{{piufav.conteudo}}</p>
+          <div  class="footer">
+            <button ion-button icon-start round small color="favorited" (click)="unfavorites(piufav)">
+              <ion-icon name="star"></ion-icon> Favoritar
+            </button>
+            <button ion-button icon-start round small color="secondary" (click)="shareWhats(piufav.conteudo)">
+              <ion-icon name="logo-whatsapp"></ion-icon> Whatsapp
+            </button>
+          </div>
+      </ion-card>
+    </div>
+    <div class="pius">
+      <ion-card *ngFor="let piu of _tempUserPius" color="test">
+        <div style="margin:1.5ch">
+          <h1 icon-start><ion-icon name="contact"></ion-icon>{{_tempUser.username}}</h1>
+          <p class="date">{{piu.data | timeAgo}}</p>  
+        </div>
+        <p class="conteudo">{{piu.conteudo}}</p>
+        <div  class="footer">
+          <button ion-button icon-start round small (click)="favorites(piu)">
+            <ion-icon name="star-outline"></ion-icon> Favoritar
+          </button>
+          <button ion-button icon-start round small color="secondary" (click)="shareWhats(piu.conteudo)">
+            <ion-icon name="logo-whatsapp"></ion-icon> Whatsapp
+          </button> 
+        </div>
+      </ion-card>
+    </div>
+  
+  </ion-content>

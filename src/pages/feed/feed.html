@@ -14,6 +14,15 @@
 
 
 <ion-content color="light">
+  <ion-refresher (ionRefresh)="doRefresh()">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card class="newPius" color="test">
     <h1 style="text-align: center">Crie um novo Piu!</h1>
     <ion-textarea placeholder="Escreva seu piu aqui!" rows="4" id="content" [(ngModel)] = "_content" (input)="updateCounter()" class={{_classInput}}></ion-textarea>

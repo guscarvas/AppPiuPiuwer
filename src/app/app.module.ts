@@ -17,6 +17,7 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { FeedPage } from '../pages/feed/feed';
 import { LogInServiceProvider } from '../providers/login-service/login-service';
 import { UsersServiceProvider } from '../providers/users-service/users-service';
+import { MeuPerfilPage } from '../pages/meu-perfil/meu-perfil';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UsersServiceProvider } from '../providers/users-service/users-service';
     CadastroPage,
     PerfilPage,
     FeedPage,
+    MeuPerfilPage,
     TimeAgoPipe
   ],
   imports: [
@@ -40,7 +42,8 @@ import { UsersServiceProvider } from '../providers/users-service/users-service';
     LoginPage,
     CadastroPage,
     PerfilPage,
-    FeedPage
+    FeedPage,
+    MeuPerfilPage
   ],
   providers: [
     StatusBar,

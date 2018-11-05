@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { PiusServiceProvider } from '../../providers/pius-service/pius-service';
 import { Piu } from '../../models/piu';
 import { UsersServiceProvider } from '../../providers/users-service/users-service';
@@ -39,12 +39,13 @@ export class FeedPage {
     private _userService: UsersServiceProvider,
     private _alertCtrl: AlertController,
     private _loginService: LogInServiceProvider,
-    private socialSharing: SocialSharing ) {
+    private socialSharing: SocialSharing,
+    public toastCtrl: ToastController ) {
 
       this._piuService.list().subscribe(
         (pius)=>{
           this.pius = pius;
-          this._userService.getUserList().subscribe(
+          this._userService.getUserList().subscribe( //codigo que não é util mais teoricamente devido a mudança na API mas n quebrou o feed entao deixei kk
             (users)=>{
               this.users = users;
               this.pius.forEach(piu => {
@@ -124,8 +125,6 @@ export class FeedPage {
   }
 
   favorites(piu){
-    var temp = JWT(this._loginService.getToken());
-    var temp2 = temp.toString();
     if (piu.usuario.id == JWT(this._loginService.getToken())['user_id']){
       this._piuService.favoritesPiu(piu,this._loginService.getToken()).subscribe(
         ()=>{
@@ -133,10 +132,15 @@ export class FeedPage {
         },
         ()=>{
           console.log("espero q n tenha vindo aqui")
-        }
-      )
+        })
     }
-    
+    else{
+        const toast = this.toastCtrl.create({
+          message: 'Você só pode favoritar pius de sua autoria!',
+          duration: 3000
+        });
+        toast.present();
+    }
   }
 
   unfavorites(piu){
@@ -147,15 +151,25 @@ export class FeedPage {
         },
         ()=>{
           console.log("espero q n tenha vindo aqui")
-        }
-      )
+        })
+    }
+    else{
+      const toast = this.toastCtrl.create({
+        message: 'Você só pode desfavoritar pius de sua autoria!',
+        duration: 3000
+      });
+      toast.present();
     }
   }
+
   shareWhats(content){
     this.socialSharing.shareViaWhatsApp(content, null, null).then(()=>{
 
       }).catch(()=>{
 
       });
+  }
+  doRefresh(){
+    this.navCtrl.setRoot(this.navCtrl.getActive().component)
   }
 }

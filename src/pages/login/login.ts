@@ -29,7 +29,7 @@ export class LoginPage {
     
    this._loginService.efetuaLogin(this.username, this.password).subscribe(
      () => {
-      this.navCtrl.setRoot(FeedPage);
+       this.navCtrl.setRoot(HomePage);
      },
      () =>{
        this._alertCtrl.create({

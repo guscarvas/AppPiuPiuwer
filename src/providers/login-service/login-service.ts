@@ -15,6 +15,7 @@ export class LogInServiceProvider {
     return this._http.post("http://piupiuwer.polijunior.com.br/api/login/",{username, password}).do(
       (answer) =>{
         this.token = answer['token'];
+        console.log(JWT(this.token))
       })
   }
 

@@ -14,6 +14,15 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh()">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+    
   <h1 class="username">{{_tempUser.username}}</h1>
   <h3 class="name">Número de Pius: {{numPius}}</h3>
   <div class="piusfav">
