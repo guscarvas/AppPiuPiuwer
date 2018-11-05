@@ -7,6 +7,8 @@ import { User } from '../../models/user';
 import { PerfilPage } from '../perfil/perfil';
 import { LogInServiceProvider } from '../../providers/login-service/login-service';
 import * as JWT from "jwt-decode";
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 /**
  * Generated class for the FeedPage page.
@@ -36,7 +38,8 @@ export class FeedPage {
     private _piuService: PiusServiceProvider,
     private _userService: UsersServiceProvider,
     private _alertCtrl: AlertController,
-    private _loginService: LogInServiceProvider ) {
+    private _loginService: LogInServiceProvider,
+    private socialSharing: SocialSharing ) {
 
       this._piuService.list().subscribe(
         (pius)=>{
@@ -121,12 +124,8 @@ export class FeedPage {
   }
 
   favorites(piu){
-    console.log(piu.usuario.id);
     var temp = JWT(this._loginService.getToken());
     var temp2 = temp.toString();
-    console.log(temp);
-    console.log(temp2);
-    console.log(JWT(this._loginService.getToken())['user_id']);
     if (piu.usuario.id == JWT(this._loginService.getToken())['user_id']){
       this._piuService.favoritesPiu(piu,this._loginService.getToken()).subscribe(
         ()=>{
@@ -152,5 +151,11 @@ export class FeedPage {
       )
     }
   }
+  shareWhats(content){
+    this.socialSharing.shareViaWhatsApp(content, null, null).then(()=>{
 
+      }).catch(()=>{
+
+      });
+  }
 }

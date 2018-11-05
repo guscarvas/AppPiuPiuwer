@@ -34,7 +34,7 @@
         <button ion-button icon-start round small color="favorited" *ngIf ="piu.favoritado" (click)="unfavorites(piu)">
           <ion-icon name="star"></ion-icon> Favoritar
         </button>
-        <button ion-button icon-start round small color="secondary">
+        <button ion-button icon-start round small color="secondary" (click)="shareWhats(piu.conteudo)">
           <ion-icon name="logo-whatsapp"></ion-icon> Whatsapp
         </button> 
       </div>
