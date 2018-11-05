@@ -1,0 +1,20 @@
+page-perfil {
+    .pius{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .footer{
+        display: flex;
+        flex-direction: row;
+    }
+    .conteudo{
+        margin-left: 1ch;
+    }
+    .username{
+        text-align: center;
+    }
+    .name{
+        text-align: center;
+    }
+
+}
